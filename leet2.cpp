@@ -62,6 +62,8 @@ public:
         cout << "reversed c: " << c << endl;
         ListNode* leftptr = nullptr;
         ListNode* startptr = nullptr;
+        bool singDigit = false;
+        if (c < 10) singDigit = true;
         while (c > 10) {
             ListNode* nd = new ListNode();
             if (leftptr != nullptr) {
@@ -78,6 +80,7 @@ public:
         ld->val = c;
         ld->next = nullptr;
         if (leftptr != nullptr) leftptr->next = ld;
+        if (singDigit) startptr = ld;
         return startptr;
     }
 };
