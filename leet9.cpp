@@ -5,11 +5,24 @@ public:
     bool isPalindrome(int x) {
         if (x < 0) return false;
         if (x == 0) return true;
-        int cur = x, cnt = 0;
+        vector<int> v;
+        int cur = x;//, cnt = 0;
         while (cur >= 10) {
+            v.push_back(cur%10);
             cur = cur/10;
-            cnt++;
         }
+        v.push_back(cur%10);
+        size_t ms = v.size()-1;
+        for (size_t i = 0; i < v.size()/2; i++ ) {
+            if ( v.at(i) != v.at(ms-i) ) {
+                return false;
+            }
+        }
+        return true;
+        
+        
+        
+        /*
         int len = cnt + 1;
         bool pali = true;
         std::cout <<"len:"<<len<<std::endl;
@@ -31,5 +44,6 @@ public:
             len = len -2;
         }
         return pali;
+        */
     }
 };
