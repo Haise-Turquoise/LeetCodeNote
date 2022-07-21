@@ -13,6 +13,7 @@ using namespace std;
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+        /*
         ListNode *curptr = head;
         unordered_map<ListNode*, int> m;
         while (curptr != nullptr) {
@@ -22,6 +23,17 @@ public:
                 return true;
             }
             curptr = curptr->next;
+        }
+        return false;
+        */
+        ListNode *slptr = head;
+        ListNode *fsptr = head;
+        while (fsptr!=nullptr && fsptr->next!= nullptr) {
+            slptr = slptr->next;
+            fsptr = fsptr->next->next;
+            if (slptr == fsptr) {
+                return true;
+            }
         }
         return false;
     }
