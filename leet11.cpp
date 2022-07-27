@@ -1,3 +1,28 @@
+// faster way
+#include<algorithm>
+#include <unordered_map>
+using namespace std;
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        // find max for each l
+        unordered_map<int,int> lmax;
+        
+        // calculate maxA
+        int maxA = 0;
+        int l = 0,  r = height.size()-1;
+        while (l!=r) {
+            maxA = max( maxA, (r-l)*min(height[l],height[r])  );
+            if (height[l]>height[r]) {
+                r--;
+            } else {
+                l++;
+            }            
+        }
+        return maxA;
+    }
+};
+
 #include<algorithm>
 #include <unordered_map>
 using namespace std;
