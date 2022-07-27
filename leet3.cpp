@@ -91,3 +91,34 @@ public:
         return 1;
     }
 };
+
+// super fast sliding window
+#include<algorithm>
+#include <unordered_map>
+using namespace std;
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if (s.size()==0) return 0;
+        unordered_map<char,int> hm;//unordered_map<char, int> hm;
+        // for (int j = 0; j < s.size(); j++) hm.insert( make_pair(s[j],0) );
+        int l = 0, r = 0, len = s.size(), maxlen = 1;
+        hm.clear();
+        bool failwin = false;
+        while (r < len) {
+            
+            if ( hm.find(s[r]) == hm.end() ) { // no repeat char
+                hm.insert(make_pair(s[r],r));
+                r++;
+            } else {                           // repeat char
+                maxlen = max(maxlen, r-l);
+                int tmpl = hm[ s[r] ] + 1;
+                for (int i = l; i < tmpl; i++) hm.erase(s[i]);
+                l = tmpl;
+            }
+            
+        }
+        maxlen = max(maxlen, r-l);
+        return maxlen;
+    }
+};
